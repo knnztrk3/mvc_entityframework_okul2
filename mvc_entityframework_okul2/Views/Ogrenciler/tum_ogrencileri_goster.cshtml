@@ -1,0 +1,76 @@
+﻿@model IEnumerable<mvc_entityframework_okul2.Models.Ogrenciler>
+
+@{
+    Layout = null;
+}
+@Styles.Render("~/Content/css")
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>tum_ogrencileri_goster</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Yeni Kayıt", "ogrenci_kaydet", null, new { @class = "btn btn-success" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Öğrenci No
+            </th>
+            <th>
+                Öğrenci Ad Soyad
+            </th>
+            <th>
+                Doğum Tarihi
+            </th>
+            <th>
+                T.C. Kimlik No
+            </th>
+            <th>
+                Adres
+            </th>
+            <th>
+                E-Mail
+            </th>
+            <th>
+                Sınıf
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.og_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.og_ad_soyad)
+        </td>
+        <td>
+            @item.dog_tar.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tc_kimlik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.siniflar.sinif_adi)
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "ogrenci_duzenle", new { id = item.og_no }, new {@class = "btn btn-primary"}) 
+            @Html.ActionLink("Sil", "ogrenci_sil", new { id = item.og_no }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+    }
+    
+    </table>
+</body>
+</html>
